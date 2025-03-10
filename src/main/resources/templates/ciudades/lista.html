@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Ciudades</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Lista de Ciudades</h2>
+    
+    <a href="/ciudades/nueva">➕ Nueva Ciudad</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Impuestos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ciudad : ${ciudades}">
+                <td th:text="${ciudad.id}"></td>
+                <td th:text="${ciudad.nombre}"></td>
+                <td th:text="${ciudad.impuestos}"></td>
+                <td>
+                    <a th:href="@{/ciudades/editar/{id}(id=${ciudad.id})}">✏️ Editar</a>
+                    <a th:href="@{/ciudades/eliminar/{id}(id=${ciudad.id})}" 
+                       onclick="return confirm('¿Estás seguro de eliminar esta ciudad?')">
+                        🗑️ Eliminar
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
