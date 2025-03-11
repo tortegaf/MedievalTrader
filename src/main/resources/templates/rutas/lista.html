@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Rutas</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Lista de Rutas</h2>
+    
+    <a href="/rutas/nueva">➕ Nueva Ruta</a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ciudad Origen</th>
+                <th>Ciudad Destino</th>
+                <th>Tipo de Ruta</th>
+                <th>Costo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ruta : ${rutas}">
+                <td th:text="${ruta.id}"></td>
+                <td th:text="${ruta.ciudadOrigen.nombre}"></td>
+                <td th:text="${ruta.ciudadDestino.nombre}"></td>
+                <td th:text="${ruta.tipoRuta}"></td>
+                <td th:text="${ruta.costo}"></td>
+                <td>
+                    <a th:href="@{/rutas/editar/{id}(id=${ruta.id})}">✏️ Editar</a>
+                    <a th:href="@{/rutas/eliminar/{id}(id=${ruta.id})}" onclick="return confirm('¿Seguro que quieres eliminar esta ruta?')">🗑️ Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a href="/ciudades">🔙 Volver a la lista de ciudades</a>
+</body>
+</html>
