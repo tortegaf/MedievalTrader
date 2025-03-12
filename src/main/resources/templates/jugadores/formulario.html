@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Jugador</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2 th:text="${jugador.id == null ? 'Crear Nuevo Jugador' : 'Editar Jugador'}"></h2>
+
+    <form th:action="@{/jugadores}" th:object="${jugador}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required>
+        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color:red"></span>
+
+        <label for="nivel">Nivel:</label>
+        <input type="number" id="nivel" th:field="*{nivel}" required>
+
+        <label for="oro">Oro:</label>
+        <input type="number" id="oro" th:field="*{oro}" required>
+
+        <button type="submit">💾 Guardar</button>
+    </form>
+
+    <a href="/jugadores">🔙 Volver al listado</a>
+</body>
+</html>

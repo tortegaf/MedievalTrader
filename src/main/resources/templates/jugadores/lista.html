@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Jugadores</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Lista de Jugadores</h2>
+
+    <a href="/jugadores/nuevo">➕ Nuevo Jugador</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Nivel</th>
+                <th>Oro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="jugador : ${jugadores}">
+                <td th:text="${jugador.id}"></td>
+                <td th:text="${jugador.nombre}"></td>
+                <td th:text="${jugador.nivel}"></td>
+                <td th:text="${jugador.oro}"></td>
+                <td>
+                    <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}">✏️ Editar</a>
+                    <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" onclick="return confirm('¿Eliminar este jugador?')">🗑️ Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
