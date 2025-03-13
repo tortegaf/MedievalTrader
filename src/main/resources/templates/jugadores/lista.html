@@ -3,46 +3,44 @@
 <head>
     <title>Lista de Jugadores</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h2>Lista de Jugadores</h2>
 
-    <a href="/jugadores/nuevo">➕ Nuevo Jugador</a>
+    <div class="container">
+        <h2>Lista de Jugadores</h2>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Nivel</th>
-                <th>Oro</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="jugador : ${jugadores}">
-                <td th:text="${jugador.id}"></td>
-                <td th:text="${jugador.nombre}"></td>
-                <td th:text="${jugador.nivel}"></td>
-                <td th:text="${jugador.oro}"></td>
-                <td>
-                    <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}">✏️ Editar</a>
-                    <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" 
-                       onclick="return confirm('¿Eliminar este jugador?')">🗑️ Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <a href="/jugadores/nuevo" class="btn btn-create">➕ Nuevo Jugador</a>
 
-    <a th:href="@{/}" style="
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 10px;">
-        🏠 Volver al Menú
-    </a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Nivel</th>
+                    <th>Oro</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="jugador : ${jugadores}">
+                    <td th:text="${jugador.id}"></td>
+                    <td th:text="${jugador.nombre}"></td>
+                    <td th:text="${jugador.nivel}"></td>
+                    <td th:text="${jugador.oro}"></td>
+                    <td>
+                        <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-edit">✏️ Editar</a>
+                        <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-delete"
+                           onclick="return confirm('¿Eliminar este jugador?')">
+                            🗑️ Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/}" class="btn btn-home">🏠 Volver al Menú</a>
+    </div>
+
 </body>
 </html>

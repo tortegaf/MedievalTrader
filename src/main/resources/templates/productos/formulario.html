@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Formulario Producto</title>
+    <title>Medieval Trader</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
     <h2 th:text="${producto.id == null ? 'Crear Nuevo Producto' : 'Editar Producto'}"></h2>
     
-    <form th:action="@{/productos}" th:object="${producto}" method="post">
+    <form th:action="@{/productos}" th:object="${producto}" method="post" class="form-container">
         <input type="hidden" th:field="*{id}">
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required>
-        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color:red"></span>
+        <div class="form-group">
+            <label for="nombre">📦 Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="input-field" required>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error-text"></span>
+        </div>
 
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" th:field="*{precio}" step="0.01" required>
-        <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" style="color:red"></span>
+        <div class="form-group">
+            <label for="precio">💰 Precio:</label>
+            <input type="number" id="precio" th:field="*{precio}" step="0.01" class="input-field" required>
+            <span th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="error-text"></span>
+        </div>
 
-        <label for="stock">Stock:</label>
-        <input type="number" id="stock" th:field="*{stock}" required>
-        <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" style="color:red"></span>
+        <div class="form-group">
+            <label for="stock">📦 Stock:</label>
+            <input type="number" id="stock" th:field="*{stock}" class="input-field" required>
+            <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="error-text"></span>
+        </div>
 
-        <button type="submit">💾 Guardar</button>
-
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+        </div>
     </form>
 
-   
-    <!-- Botón para volver al listado de productos -->
-    <a href="/productos" style="
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #28a745;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 10px;">
-        🔙 Volver al listado
-    </a>
+    <div class="form-actions">
+        <a href="/productos" class="btn btn-secondary">🔙 Volver al listado</a>
+    </div>
 
 </body>
 </html>

@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Formulario Ciudad</title>
+    <title>Medieval Trader</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-    <h2 th:text="${ciudad.id == null ? 'Crear Nueva Ciudad' : 'Editar Ciudad'}"></h2>
+    <h2 th:text="${ciudad.id == null ? ' Crear Nueva Ciudad' : 'Editar Ciudad'}"></h2>
     
-    <form th:action="@{/ciudades}" th:object="${ciudad}" method="post">
+    <form th:action="@{/ciudades}" th:object="${ciudad}" method="post" class="form-container">
         <input type="hidden" th:field="*{id}">
-        
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required>
-        
-        <label for="impuestos">Impuestos:</label>
-        <input type="number" id="impuestos" th:field="*{impuestos}" required>
-        
-        <button type="submit">💾 Guardar</button>
+
+        <div class="form-group">
+            <label for="nombre">🏰 Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="input-field" required>
+        </div>
+
+        <div class="form-group">
+            <label for="impuestos">💰 Impuestos:</label>
+            <input type="number" id="impuestos" th:field="*{impuestos}" class="input-field" required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+        </div>
     </form>
 
-    <a href="/ciudades">🔙 Volver al listado</a>
+    <div class="form-actions">
+        <a href="/ciudades" class="btn btn-secondary">🔙 Volver al listado</a>
+    </div>
 </body>
 </html>

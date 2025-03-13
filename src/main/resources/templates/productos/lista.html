@@ -3,47 +3,44 @@
 <head>
     <title>Lista de Productos</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h2>Lista de Productos</h2>
-    
-    <a href="/productos/nuevo">➕ Nuevo Producto</a>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="producto : ${productos}">
-                <td th:text="${producto.id}"></td>
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td th:text="${producto.stock}"></td>
-                <td>
-                    <a th:href="@{/productos/editar/{id}(id=${producto.id})}">✏️ Editar</a>
-                    <a th:href="@{/productos/eliminar/{id}(id=${producto.id})}" 
-                       onclick="return confirm('¿Seguro que quieres eliminar este producto?')">🗑️ Eliminar</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h2>Lista de Productos</h2>
 
-    <!-- Botón para volver al menú principal -->
-    <a th:href="@{/}" style="
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 10px;">
-        🏠 Volver al Menú
-    </a>
+        <a href="/productos/nuevo" class="btn btn-create">➕ Nuevo Producto</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td>
+                        <a th:href="@{/productos/editar/{id}(id=${producto.id})}" class="btn btn-edit">✏️ Editar</a>
+                        <a th:href="@{/productos/eliminar/{id}(id=${producto.id})}" class="btn btn-delete"
+                           onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
+                            🗑️ Eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/}" class="btn btn-home">🏠 Volver al Menú</a>
+    </div>
+
 </body>
 </html>

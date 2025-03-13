@@ -1,37 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Formulario Ruta</title>
+    <title>Medieval Trader</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h2 th:text="${ruta.id == null ? 'Crear Nueva Ruta' : 'Editar Ruta'}"></h2>
-    
-    <form th:action="@{/rutas}" th:object="${ruta}" method="post">
-        <input type="hidden" th:field="*{id}">
-        
-        <label for="ciudadOrigen">Ciudad Origen:</label>
-        <select id="ciudadOrigen" th:field="*{ciudadOrigen}">
-            <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
-        </select>
-        
-        <label for="ciudadDestino">Ciudad Destino:</label>
-        <select id="ciudadDestino" th:field="*{ciudadDestino}">
-            <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
-        </select>
-        
-        <label for="tipoRuta">Tipo de Ruta:</label>
-        <select id="tipoRuta" th:field="*{tipoRuta}">
-            <option value="Segura">Segura</option>
-            <option value="Insegura">Insegura</option>
-        </select>
-        
-        <label for="costo">Costo:</label>
-        <input type="number" id="costo" th:field="*{costo}" required>
-        
-        <button type="submit">💾 Guardar</button>
-    </form>
 
-    <a href="/rutas">🔙 Volver al listado</a>
+    <div class="container">
+        <h2 th:text="${ruta.id == null ? 'Crear Nueva Ruta' : 'Editar Ruta'}"></h2>
+        
+        <form th:action="@{/rutas}" th:object="${ruta}" method="post" class="form-container">
+            <input type="hidden" th:field="*{id}">
+            
+            <div class="form-group">
+                <label for="ciudadOrigen">🏙️ Ciudad Origen:</label>
+                <div class="select-container">
+                    <select id="ciudadOrigen" th:field="*{ciudadOrigen}" class="input-field">
+                        <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="ciudadDestino">🌆 Ciudad Destino:</label>
+                <div class="select-container">
+                    <select id="ciudadDestino" th:field="*{ciudadDestino}" class="input-field">
+                        <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.nombre}"></option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="tipoRuta">🛤️ Tipo de Ruta:</label>
+                <div class="select-container">
+                    <select id="tipoRuta" th:field="*{tipoRuta}" class="input-field">
+                        <option value="Segura">Segura</option>
+                        <option value="Insegura">Insegura</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="costo">💰 Costo:</label>
+                <input type="number" id="costo" th:field="*{costo}" required class="input-field">
+            </div>
+        
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">💾 Guardar</button>
+            </div>
+        </form>
+        
+        
+
+        <a th:href="@{/rutas}" class="btn btn-secondary">🔙 Volver al Listado</a>
+    </div>
+
 </body>
 </html>

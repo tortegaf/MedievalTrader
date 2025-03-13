@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Formulario Jugador</title>
+    <title>Medieval Trader</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
     <h2 th:text="${jugador.id == null ? 'Crear Nuevo Jugador' : 'Editar Jugador'}"></h2>
 
-    <form th:action="@{/jugadores}" th:object="${jugador}" method="post">
+    <form th:action="@{/jugadores}" th:object="${jugador}" method="post" class="form-container">
         <input type="hidden" th:field="*{id}">
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required>
-        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="color:red"></span>
+        <div class="form-group">
+            <label for="nombre">🧙‍♂️ Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="input-field" required>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error-text"></span>
+        </div>
 
-        <label for="nivel">Nivel:</label>
-        <input type="number" id="nivel" th:field="*{nivel}" required>
+        <div class="form-group">
+            <label for="nivel">⚔️ Nivel:</label>
+            <input type="number" id="nivel" th:field="*{nivel}" class="input-field" required>
+        </div>
 
-        <label for="oro">Oro:</label>
-        <input type="number" id="oro" th:field="*{oro}" required>
+        <div class="form-group">
+            <label for="oro">💰 Oro:</label>
+            <input type="number" id="oro" th:field="*{oro}" class="input-field" required>
+        </div>
 
-        <button type="submit">💾 Guardar</button>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Guardar</button>
+        </div>
     </form>
 
-    <a href="/jugadores">🔙 Volver al listado</a>
-   
-    
+    <div class="form-actions">
+        <a href="/jugadores" class="btn btn-secondary">🔙 Volver al listado</a>
+    </div>
 </body>
 </html>
