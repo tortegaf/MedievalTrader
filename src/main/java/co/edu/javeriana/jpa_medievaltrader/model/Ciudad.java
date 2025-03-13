@@ -5,11 +5,20 @@ import jakarta.persistence.*;
 @Entity
 public class Ciudad {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //GENERA AUTOMATICAMENTE EL ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     private String nombre;
     private int impuestos;
+
+    // 🔹 Constructor vacío requerido por JPA
+    public Ciudad() {}
+
+    // 🔹 Constructor que soluciona el error en DbInitializer
+    public Ciudad(String nombre, int impuestos) {
+        this.nombre = nombre;
+        this.impuestos = impuestos;
+    }
 
     // Getters y Setters
     public Long getId() { return id; }
