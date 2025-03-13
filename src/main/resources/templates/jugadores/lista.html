@@ -27,10 +27,22 @@
                 <td th:text="${jugador.oro}"></td>
                 <td>
                     <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}">✏️ Editar</a>
-                    <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" onclick="return confirm('¿Eliminar este jugador?')">🗑️ Eliminar</a>
+                    <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" 
+                       onclick="return confirm('¿Eliminar este jugador?')">🗑️ Eliminar</a>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <a th:href="@{/}" style="
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;">
+        🏠 Volver al Menú
+    </a>
 </body>
 </html>

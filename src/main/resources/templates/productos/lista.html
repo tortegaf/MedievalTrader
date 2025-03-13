@@ -27,10 +27,23 @@
                 <td th:text="${producto.stock}"></td>
                 <td>
                     <a th:href="@{/productos/editar/{id}(id=${producto.id})}">✏️ Editar</a>
-                    <a th:href="@{/productos/eliminar/{id}(id=${producto.id})}" onclick="return confirm('¿Seguro que quieres eliminar este producto?')">🗑️ Eliminar</a>
+                    <a th:href="@{/productos/eliminar/{id}(id=${producto.id})}" 
+                       onclick="return confirm('¿Seguro que quieres eliminar este producto?')">🗑️ Eliminar</a>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <!-- Botón para volver al menú principal -->
+    <a th:href="@{/}" style="
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;">
+        🏠 Volver al Menú
+    </a>
 </body>
 </html>

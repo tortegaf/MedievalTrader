@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Medieval Trader - Menú Principal</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('/images/background.jpg'); /* Agrega una imagen de fondo */
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        h1 {
+            font-size: 40px;
+        }
+        .btn {
+            display: block;
+            width: 200px;
+            margin: 15px auto;
+            padding: 10px;
+            background-color: #8B4513;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+        .btn:hover {
+            background-color: #A0522D;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>⚔️ Medieval Trader ⚔️</h1>
+        <p>Bienvenido al juego, selecciona una opción:</p>
+
+        <a href="/jugadores" class="btn">🧙‍♂️ Jugadores</a>
+        <a href="/ciudades" class="btn">🏙 Ciudades</a>
+        <a href="/rutas" class="btn">🛤 Rutas</a>
+        <a href="/productos" class="btn">📦 Productos</a>
+    </div>
+
+</body>
+</html>

@@ -29,12 +29,23 @@
                 <td th:text="${ruta.costo}"></td>
                 <td>
                     <a th:href="@{/rutas/editar/{id}(id=${ruta.id})}">✏️ Editar</a>
-                    <a th:href="@{/rutas/eliminar/{id}(id=${ruta.id})}" onclick="return confirm('¿Seguro que quieres eliminar esta ruta?')">🗑️ Eliminar</a>
+                    <a th:href="@{/rutas/eliminar/{id}(id=${ruta.id})}" 
+                       onclick="return confirm('¿Seguro que quieres eliminar esta ruta?')">🗑️ Eliminar</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    
-    <a href="/ciudades">🔙 Volver a la lista de ciudades</a>
+
+    <!-- Botón para volver al menú principal -->
+    <a th:href="@{/}" style="
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;">
+        🏠 Volver al Menú
+    </a>
 </body>
 </html>

@@ -23,8 +23,21 @@
         <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" style="color:red"></span>
 
         <button type="submit">💾 Guardar</button>
+
     </form>
 
-    <a href="/productos">🔙 Volver al listado</a>
+   
+    <!-- Botón para volver al listado de productos -->
+    <a href="/productos" style="
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;">
+        🔙 Volver al listado
+    </a>
+
 </body>
 </html>
