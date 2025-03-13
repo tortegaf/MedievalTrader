@@ -11,16 +11,13 @@ public class Ciudad {
     private String nombre;
     private int impuestos;
 
-    // 🔹 Constructor vacío requerido por JPA
     public Ciudad() {}
 
-    // 🔹 Constructor que soluciona el error en DbInitializer
     public Ciudad(String nombre, int impuestos) {
         this.nombre = nombre;
         this.impuestos = impuestos;
     }
 
-    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
