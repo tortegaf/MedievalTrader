@@ -1,0 +1,37 @@
+<h2>{{ ciudad.id == null ? 'Crear Nueva Ciudad' : 'Editar Ciudad' }}</h2>
+
+<form (ngSubmit)="guardarCiudad()" #formCiudad="ngForm" class="form-container">
+  <input type="hidden" [(ngModel)]="ciudad.id" name="id" />
+
+  <div class="form-group">
+    <label for="nombre">🏰 Nombre:</label>
+    <input
+      type="text"
+      id="nombre"
+      [(ngModel)]="ciudad.nombre"
+      name="nombre"
+      class="input-field"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="impuestos">💰 Impuestos:</label>
+    <input
+      type="number"
+      id="impuestos"
+      [(ngModel)]="ciudad.impuestos"
+      name="impuestos"
+      class="input-field"
+      required
+    />
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">💾 Guardar</button>
+  </div>
+</form>
+
+<div class="form-actions">
+  <button routerLink="/ciudades/lista" class="btn btn-secondary">🔙 Volver al listado</button>
+</div>

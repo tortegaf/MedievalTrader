@@ -1,0 +1,34 @@
+<div class="container">
+    <h2>Lista de Productos</h2>
+  
+    <button routerLink="/productos/formulario" class="btn btn-create">➕ Nuevo Producto</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.precio }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>
+            <button (click)="editarProducto(producto.id)" class="btn btn-edit">✏️ Editar</button>
+            <button (click)="eliminarProducto(producto.id)" class="btn btn-delete">
+              🗑️ Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button routerLink="/" class="btn btn-home">🏠 Volver al Menú</button>
+  </div>
+  

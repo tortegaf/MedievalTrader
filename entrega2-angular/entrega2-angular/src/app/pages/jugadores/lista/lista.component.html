@@ -1,0 +1,37 @@
+<div class="container">
+    <h2>Lista de Jugadores</h2>
+  
+    <button routerLink="/jugadores/formulario" class="btn btn-create">➕ Nuevo Jugador</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Nivel</th>
+          <th>Oro</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jugador of jugadores">
+          <td>{{ jugador.id }}</td>
+          <td>{{ jugador.nombre }}</td>
+          <td>{{ jugador.nivel }}</td>
+          <td>{{ jugador.oro }}</td>
+          <td>
+            <button (click)="editarJugador(jugador.id)" class="btn btn-edit">✏️ Editar</button>
+            <button (click)="eliminarJugador(jugador.id)" class="btn btn-delete" 
+                    [disabled]="!jugador.id"
+                    title="Eliminar jugador"
+            >
+              🗑️ Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button routerLink="/" class="btn btn-home">🏠 Volver al Menú</button>
+  </div>
+  

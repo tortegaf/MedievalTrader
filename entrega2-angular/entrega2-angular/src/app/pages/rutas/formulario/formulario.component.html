@@ -1,0 +1,73 @@
+<div class="container">
+    <h2>{{ ruta.id === null ? 'Crear Nueva Ruta' : 'Editar Ruta' }}</h2>
+  
+    <form (ngSubmit)="guardarRuta()" #rutaForm="ngForm" class="form-container">
+      <input type="hidden" [(ngModel)]="ruta.id" name="id" />
+  
+      <!-- Ciudad Origen -->
+      <div class="form-group">
+        <label for="ciudadOrigen">🏙️ Ciudad Origen:</label>
+        <select
+          id="ciudadOrigen"
+          [(ngModel)]="ruta.ciudadOrigen"
+          name="ciudadOrigen"
+          class="input-field"
+          required
+        >
+          <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+        </select>
+      </div>
+  
+      <!-- Ciudad Destino -->
+      <div class="form-group">
+        <label for="ciudadDestino">🌆 Ciudad Destino:</label>
+        <select
+          id="ciudadDestino"
+          [(ngModel)]="ruta.ciudadDestino"
+          name="ciudadDestino"
+          class="input-field"
+          required
+        >
+          <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+        </select>
+      </div>
+  
+      <!-- Tipo de Ruta -->
+      <div class="form-group">
+        <label for="tipoRuta">🛤️ Tipo de Ruta:</label>
+        <select
+          id="tipoRuta"
+          [(ngModel)]="ruta.tipoRuta"
+          name="tipoRuta"
+          class="input-field"
+          required
+        >
+          <option value="Segura">Segura</option>
+          <option value="Insegura">Insegura</option>
+        </select>
+      </div>
+  
+      <!-- Costo -->
+      <div class="form-group">
+        <label for="costo">💰 Costo:</label>
+        <input
+          type="number"
+          id="costo"
+          [(ngModel)]="ruta.costo"
+          name="costo"
+          class="input-field"
+          required
+        />
+      </div>
+  
+      <!-- Guardar -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">💾 Guardar</button>
+      </div>
+    </form>
+  
+    <div class="form-actions">
+      <button routerLink="/rutas/lista" class="btn btn-secondary">🔙 Volver al Listado</button>
+    </div>
+  </div>
+  

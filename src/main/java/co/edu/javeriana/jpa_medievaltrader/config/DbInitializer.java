@@ -30,12 +30,14 @@ public class DbInitializer {
         return args -> {
             Random random = new Random();
 
+
             if (ciudadRepository.count() == 0) {
                 for (int i = 1; i <= 100; i++) {
                     Ciudad ciudad = new Ciudad("Ciudad " + i, random.nextInt(500)); 
                     ciudadRepository.save(ciudad);
                 }
             }
+
 
             if (productoRepository.count() == 0) {
                 List<String> nombresProductos = List.of("Espada", "Armadura", "Poción", "Pergamino", "Antorcha", 
@@ -80,7 +82,7 @@ public class DbInitializer {
                 }
             }
 
-            System.out.println("✅ Base de datos inicializada con ciudades, productos, jugadores y rutas.");
+            System.out.println("Base de datos inicializada con ciudades, productos, jugadores y rutas.");
         };
     }
 }

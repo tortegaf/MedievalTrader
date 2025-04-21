@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Lista de Ciudades</h2>
+  
+    <button routerLink="/ciudades/formulario" class="btn btn-create">➕ Nueva Ciudad</button>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Impuestos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ciudad of ciudades">
+          <td>{{ ciudad.id }}</td>
+          <td>{{ ciudad.nombre }}</td>
+          <td>{{ ciudad.impuestos }}</td>
+          <td>
+            <button (click)="editarCiudad(ciudad.id)" class="btn btn-edit">✏️ Editar</button>
+            <button (click)="eliminarCiudad(ciudad.id)" class="btn btn-delete">🗑️ Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button routerLink="/" class="btn btn-home">🏠 Volver al Menú</button>
+  </div>
+  
