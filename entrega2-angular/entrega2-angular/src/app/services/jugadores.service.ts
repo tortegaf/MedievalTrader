@@ -30,5 +30,13 @@ export class JugadoresService {
   viajar(jugadorId: number, ciudadId: number): Observable<Jugador> {
     return this.http.put<Jugador>(`${this.apiUrl}/${jugadorId}/viajar`, { ciudadId });
   }
+
+  comprarProducto(jugadorId: number, productoId: number): Observable<Jugador> {
+    return this.http.post<Jugador>(
+      `${this.apiUrl}/${jugadorId}/comprar`,
+      { productoId }
+    );
+  }
+  
   
 }

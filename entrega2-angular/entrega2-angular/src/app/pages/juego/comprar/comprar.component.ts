@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Jugador } from '../../../model/jugador.model';
 import { Producto } from '../../../model/producto.model';
+import { ProductosService } from '../../../services/productos.service';
+import { JugadoresService } from '../../../services/jugadores.service';
 
 @Component({
   selector: 'app-comprar',
@@ -14,46 +16,31 @@ export class ComprarComponent implements OnInit {
   jugador: Jugador | null = null;
   productosDisponibles: Producto[] = [];
 
+  constructor(
+    private productosService: ProductosService,
+    private jugadoresService: JugadoresService
+  ) {}
+
   ngOnInit(): void {
-    if (typeof sessionStorage !== 'undefined') {
-      const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
-      if (jugadorGuardado) {
-        this.jugador = JSON.parse(jugadorGuardado);
-      }
+    const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
+    if (jugadorGuardado) {
+      this.jugador = JSON.parse(jugadorGuardado);
     }
 
-    // Productos simulados (mock)
-    this.productosDisponibles = [
-      { id: 1, nombre: 'Espada', precio: 100, stock: 10 },
-      { id: 2, nombre: 'Poción', precio: 50, stock: 20 },
-      { id: 3, nombre: 'Mapa antiguo', precio: 75, stock: 5 }
-    ];
+    this.productosService.listarProductos().subscribe((productos) => {
+      this.productosDisponibles = productos;
+    });
   }
 
   comprar(producto: Producto): void {
     if (!this.jugador) return;
 
-    if (this.jugador.oro >= producto.precio) {
-      this.jugador.oro -= producto.precio;
-
-      if (!this.jugador.inventario) {
-        this.jugador.inventario = [];
-      }
-
-      const existente = this.jugador.inventario.find((p: Producto) => p.id === producto.id);
-      if (existente) {
-        existente.stock += 1;
-      } else {
-        this.jugador.inventario.push({ ...producto, stock: 1 });
-      }
-
-      if (typeof sessionStorage !== 'undefined') {
-        sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(this.jugador));
-      }
-
+    this.jugadoresService.comprarProducto(this.jugador.id!, producto.id!).subscribe((jugadorActualizado) => {
+      this.jugador = jugadorActualizado;
+      sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(this.jugador));
       alert(`🛍️ Compraste: ${producto.nombre}`);
-    } else {
-      alert('💸 No tienes suficiente oro');
-    }
+    }, error => {
+      alert('💸 No tienes suficiente oro o ocurrió un error');
+    });
   }
 }
