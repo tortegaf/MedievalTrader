@@ -46,11 +46,15 @@ export class FormularioComponent {
   }
 
   guardarRuta() {
+    this.ruta.ciudadOrigen = this.ciudades.find(c => c.id === this.ruta.ciudadOrigen?.id) ?? null;
+    this.ruta.ciudadDestino = this.ciudades.find(c => c.id === this.ruta.ciudadDestino?.id) ?? null;
+  
     this.rutaService.guardarRuta(this.ruta).subscribe(() => {
       this.router.navigate(['/rutas/lista']);
     });
   }
-
+  
+  
   cargarRuta(id: number) {
     this.rutaService.obtenerRutaPorId(id).subscribe((data) => {
       this.ruta = data;

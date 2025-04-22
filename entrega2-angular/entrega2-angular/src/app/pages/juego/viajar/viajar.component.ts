@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Jugador } from '../../../model/jugador.model';
 import { Ruta } from '../../../model/ruta.model';
+import { RutasService } from '../../../services/rutas.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-viajar',
@@ -13,21 +15,48 @@ import { Ruta } from '../../../model/ruta.model';
 export class ViajarComponent implements OnInit {
   ciudadActual = { nombre: 'Ciudad Desconocida' };
   rutasDisponibles: Ruta[] = [];
+  jugador: Jugador | null = null;
+
+  constructor(
+    private rutasService: RutasService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
-    if (jugadorGuardado) {
-      const jugador: Jugador = JSON.parse(jugadorGuardado);
-      this.ciudadActual = jugador['ciudad'] ?? { nombre: 'Ciudad Desconocida' };
+    if (typeof window !== 'undefined') {
+      const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
+      if (jugadorGuardado) {
+        this.jugador = JSON.parse(jugadorGuardado);
 
-      this.rutasDisponibles = [
-        { id: 1, ciudadOrigen: 1, ciudadDestino: 2, tipoRuta: 'Segura', costo: 10 },
-        { id: 2, ciudadOrigen: 1, ciudadDestino: 3, tipoRuta: 'Insegura', costo: 15 }
-      ];
+        if (this.jugador && this.jugador.ciudad) {
+          this.ciudadActual = this.jugador.ciudad;
+
+          const ciudadId = this.jugador.ciudad.id;
+          if (ciudadId != null) {
+            this.rutasService.listarRutas().subscribe((rutas) => {
+              this.rutasDisponibles = rutas.filter(ruta =>
+                ruta.ciudadOrigen?.id === ciudadId
+              );
+            });
+          }
+        }
+      }
     }
   }
 
   viajar(ruta: Ruta): void {
-    alert(`Viajando a ciudad ID ${ruta.ciudadDestino} por una ruta ${ruta.tipoRuta} con costo ${ruta.costo}`);
+    if (!this.jugador || !ruta.ciudadDestino?.id) return;
+
+    const url = `http://localhost:8080/api/jugadores/${this.jugador.id}/viajar`;
+    const body = { ciudadId: ruta.ciudadDestino.id };
+
+    this.http.put<Jugador>(url, body).subscribe((jugadorActualizado) => {
+      sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(jugadorActualizado));
+
+      alert(`¡Viajaste con éxito a ${ruta.ciudadDestino?.nombre}! 🏰`);
+
+      this.router.navigate(['/juego/ciudad']);
+    });
   }
 }

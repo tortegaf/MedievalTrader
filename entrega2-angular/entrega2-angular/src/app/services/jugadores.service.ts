@@ -26,4 +26,9 @@ export class JugadoresService {
   eliminarJugador(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  viajar(jugadorId: number, ciudadId: number): Observable<Jugador> {
+    return this.http.put<Jugador>(`${this.apiUrl}/${jugadorId}/viajar`, { ciudadId });
+  }
+  
 }

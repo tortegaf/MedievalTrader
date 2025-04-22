@@ -5,32 +5,33 @@
       <input type="hidden" [(ngModel)]="ruta.id" name="id" />
   
       <!-- Ciudad Origen -->
-      <div class="form-group">
-        <label for="ciudadOrigen">🏙️ Ciudad Origen:</label>
-        <select
-          id="ciudadOrigen"
-          [(ngModel)]="ruta.ciudadOrigen"
-          name="ciudadOrigen"
-          class="input-field"
-          required
-        >
-          <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
-        </select>
-      </div>
-  
-      <!-- Ciudad Destino -->
-      <div class="form-group">
-        <label for="ciudadDestino">🌆 Ciudad Destino:</label>
-        <select
-          id="ciudadDestino"
-          [(ngModel)]="ruta.ciudadDestino"
-          name="ciudadDestino"
-          class="input-field"
-          required
-        >
-          <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
-        </select>
-      </div>
+<div class="form-group">
+  <label for="ciudadOrigen">🏙️ Ciudad Origen:</label>
+  <select
+    id="ciudadOrigen"
+    [(ngModel)]="ruta.ciudadOrigen"
+    name="ciudadOrigen"
+    class="input-field"
+    required
+  >
+    <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad">{{ ciudad.nombre }}</option>
+  </select>
+</div>
+
+<!-- Ciudad Destino -->
+<div class="form-group">
+  <label for="ciudadDestino">🌆 Ciudad Destino:</label>
+  <select
+    id="ciudadDestino"
+    [(ngModel)]="ruta.ciudadDestino"
+    name="ciudadDestino"
+    class="input-field"
+    required
+  >
+    <option *ngFor="let ciudad of ciudades" [ngValue]="ciudad">{{ ciudad.nombre }}</option>
+  </select>
+</div>
+
   
       <!-- Tipo de Ruta -->
       <div class="form-group">

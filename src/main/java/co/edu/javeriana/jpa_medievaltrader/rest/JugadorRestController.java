@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/jugadores")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
 public class JugadorRestController {
 
     @Autowired
@@ -34,5 +35,23 @@ public class JugadorRestController {
     @DeleteMapping("/{id}")
     public void eliminarJugador(@PathVariable Long id) {
         jugadorService.eliminarJugador(id);
+    }
+
+    @PutMapping("/{id}/viajar")
+    public Jugador viajar(@PathVariable Long id, @RequestBody Map<String, Long> body) {
+        Long ciudadId = body.get("ciudadId");
+        return jugadorService.viajar(id, ciudadId);
+    }
+
+    @PostMapping("/{id}/comprar")
+    public Jugador comprarProducto(@PathVariable Long id, @RequestBody Map<String, Long> body) {
+        Long productoId = body.get("productoId");
+        return jugadorService.comprarProducto(id, productoId);
+    }
+
+    @PostMapping("/{id}/vender")
+    public Jugador venderProducto(@PathVariable Long id, @RequestBody Map<String, Long> body) {
+        Long productoId = body.get("productoId");
+        return jugadorService.venderProducto(id, productoId);
     }
 }

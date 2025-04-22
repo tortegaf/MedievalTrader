@@ -1,34 +1,33 @@
 <div class="container">
-    <h2>Lista de Rutas</h2>
-  
-    <button routerLink="/rutas/formulario" class="btn btn-create">➕ Nueva Ruta</button>
+  <h2>Lista de Rutas</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>ID Ciudad Origen</th>
-          <th>ID Ciudad Destino</th>
-          <th>Tipo de Ruta</th>
-          <th>Costo</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ruta of rutas">
-          <td>{{ ruta.id }}</td>
-          <td>{{ ruta.ciudadOrigen }}</td>
-          <td>{{ ruta.ciudadDestino }}</td>
-          <td>{{ ruta.tipoRuta }}</td>
-          <td>{{ ruta.costo }}</td>
-          <td>
-            <button (click)="editarRuta(ruta.id)" class="btn btn-edit">✏️ Editar</button>
-            <button (click)="eliminarRuta(ruta.id)" class="btn btn-delete">🗑️ Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <button routerLink="/" class="btn btn-home">🏠 Volver al Menú</button>
-  </div>
-  
+  <button routerLink="/rutas/formulario" class="btn btn-create">➕ Nueva Ruta</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ciudad Origen</th>
+        <th>Ciudad Destino</th>
+        <th>Tipo de Ruta</th>
+        <th>Costo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ruta of rutas">
+        <td>{{ ruta.id }}</td>
+        <td>{{ ruta.ciudadOrigen?.nombre }}</td>
+        <td>{{ ruta.ciudadDestino?.nombre }}</td>
+        <td>{{ ruta.tipoRuta }}</td>
+        <td>{{ ruta.costo }}</td>
+        <td>
+          <button (click)="editarRuta(ruta.id)" class="btn btn-edit">✏️ Editar</button>
+          <button (click)="eliminarRuta(ruta.id)" class="btn btn-delete">🗑️ Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button routerLink="/" class="btn btn-home">🏠 Volver al Menú</button>
+</div>

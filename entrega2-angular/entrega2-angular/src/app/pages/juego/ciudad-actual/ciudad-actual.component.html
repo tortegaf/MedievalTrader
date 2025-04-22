@@ -1,21 +1,39 @@
-<div class="container" *ngIf="jugador && ciudad">
-    <h2>🏙️ Estás en {{ ciudad.nombre }}</h2>
-  
-    <p><strong>Jugador:</strong> {{ jugador.nombre }}</p>
-    <p><strong>Nivel:</strong> {{ jugador.nivel }}</p>
-    <p><strong>Oro:</strong> {{ jugador.oro }}</p>
-  
-    <div class="menu-buttons">
-      <button routerLink="/juego/comprar" class="btn-create">🛒 Comprar</button>
-      <button routerLink="/juego/vender" class="btn-create">💰 Vender</button>
-      <button routerLink="/juego/viajar" class="btn-create">🛤️ Viajar</button>
-      <button routerLink="/juego/inventario" class="btn-create">🎒 Inventario</button>
-      <button routerLink="/dashboard" class="btn-home">🏠 Volver al Menú</button>
-    </div>
+<div class="container" *ngIf="jugador">
+  <h2>🏙️ Estás en {{ jugador.ciudad?.nombre || 'Ciudad Desconocida' }}</h2>
+
+  <p><strong>Jugador:</strong> {{ jugador.nombre }}</p>
+  <p><strong>Nivel:</strong> {{ jugador.nivel }}</p>
+  <p><strong>Oro:</strong> {{ jugador.oro }}</p>
+
+  <div class="form-group">
+    <label for="ciudad">Asignar Ciudad:</label>
+    <select
+      [(ngModel)]="ciudadSeleccionadaId"
+      name="ciudad"
+      id="ciudad"
+      class="input-field"
+      required
+    >
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+        {{ ciudad.nombre }}
+      </option>
+    </select>
   </div>
-  
-  <div *ngIf="!jugador">
-    <p>No se ha seleccionado ningún jugador.</p>
-    <button routerLink="/juego/seleccionar" class="btn btn-primary">Seleccionar jugador</button>
+
+  <div class="form-actions">
+    <button (click)="asignarCiudad()" class="btn btn-primary">✅ Asignar Ciudad</button>
   </div>
-  
+
+  <div class="menu-buttons">
+    <button routerLink="/juego/comprar" class="btn-create">🛒 Comprar</button>
+    <button routerLink="/juego/vender" class="btn-create">💰 Vender</button>
+    <button routerLink="/juego/viajar" class="btn-create">🛤️ Viajar</button>
+    <button routerLink="/juego/inventario" class="btn-create">🎒 Inventario</button>
+    <button routerLink="/dashboard" class="btn-home">🏠 Volver al Menú</button>
+  </div>
+</div>
+
+<div *ngIf="!jugador">
+  <p>No se ha seleccionado ningún jugador.</p>
+  <button routerLink="/juego/seleccionar" class="btn btn-primary">Seleccionar jugador</button>
+</div>
