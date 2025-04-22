@@ -22,9 +22,10 @@ public class JugadorService {
         return jugadorRepository.findById(id);
     }
 
-    public void guardarJugador(Jugador jugador) {
-        jugadorRepository.save(jugador);
+    public Jugador guardarJugador(Jugador jugador) {
+        return jugadorRepository.save(jugador);
     }
+    
 
     public void eliminarJugador(Long id) {
         jugadorRepository.deleteById(id);

@@ -1,6 +1,5 @@
 package co.edu.javeriana.jpa_medievaltrader.controller;
 
-import co.edu.javeriana.jpa_medievaltrader.model.Ciudad;
 import co.edu.javeriana.jpa_medievaltrader.model.Ruta;
 import co.edu.javeriana.jpa_medievaltrader.service.CiudadService;
 import co.edu.javeriana.jpa_medievaltrader.service.RutaService;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller

@@ -1,0 +1,34 @@
+<div class="container" *ngIf="jugador">
+    <h2>💰 Vender productos de {{ jugador.nombre }}</h2>
+    <p>Oro actual: {{ jugador.oro }}</p>
+  
+    <div *ngIf="inventario.length > 0; else sinInventario">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of inventario">
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.stock }}</td>
+            <td>{{ item.precio }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="vender(item)">🪙 Vender</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #sinInventario>
+      <p>No tienes productos para vender.</p>
+    </ng-template>
+  
+    <button routerLink="/juego/ciudad" class="btn btn-home">🏠 Volver</button>
+  </div>
+  

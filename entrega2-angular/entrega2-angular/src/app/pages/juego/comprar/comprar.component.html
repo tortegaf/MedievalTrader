@@ -1,0 +1,28 @@
+<div class="container" *ngIf="jugador">
+    <h2>🛒 Comprar productos en {{ jugador.ciudad?.nombre }}</h2>
+    <p>Oro disponible: {{ jugador.oro }}</p>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productosDisponibles">
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.precio }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="comprar(producto)">🛍️ Comprar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button routerLink="/juego/ciudad" class="btn btn-home">🏠 Volver</button>
+  </div>
+  

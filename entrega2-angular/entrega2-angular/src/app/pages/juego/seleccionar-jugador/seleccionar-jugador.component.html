@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Selecciona un jugador</h2>
+
+  <div *ngIf="jugadores.length === 0">
+    <p>No hay jugadores registrados</p>
+  </div>
+
+  <div *ngFor="let jugador of jugadores" class="form-group">
+    <p>
+      🧙‍♂️ <strong>{{ jugador.nombre }}</strong>  
+      | Nivel: {{ jugador.nivel }}  
+      | Oro: {{ jugador.oro }}
+    </p>
+    <button class="btn btn-primary" (click)="seleccionar(jugador)">Seleccionar</button>
+  </div>
+
+  <div *ngIf="jugadorSeleccionado" style="margin-top: 30px;" class="form-actions">
+    <p><strong>Seleccionaste:</strong> {{ jugadorSeleccionado.nombre }}</p>
+    <button class="btn btn-secondary" (click)="continuar()" style="font-size: 18px; padding: 12px 24px;">
+      ⚔️ Entrar al mundo medieval
+    </button>
+  </div>
+</div>

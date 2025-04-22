@@ -19,6 +19,14 @@ import { ListaComponent as ListaRutasComponent } from './pages/rutas/lista/lista
 // Dashboard
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
+// Juego
+import { SeleccionarJugadorComponent } from './pages/juego/seleccionar-jugador/seleccionar-jugador.component';
+import { CiudadActualComponent } from './pages/juego/ciudad-actual/ciudad-actual.component';
+import { ViajarComponent } from './pages/juego/viajar/viajar.component';
+import { ComprarComponent } from './pages/juego/comprar/comprar.component';
+import { InventarioComponent } from './pages/juego/inventario/inventario.component';
+import { VenderComponent } from './pages/juego/vender/vender.component';
+
 export const routes: Routes = [
   // Ciudades
   { path: 'ciudades/formulario', component: FormularioCiudadesComponent },
@@ -39,6 +47,17 @@ export const routes: Routes = [
   // Dashboard
   { path: 'dashboard', component: DashboardComponent },
 
+  // Juego
+  { path: 'juego/seleccionar', component: SeleccionarJugadorComponent },
+  { path: 'juego/ciudad', component: CiudadActualComponent },
+  { path: 'juego/viajar', component: ViajarComponent },
+  { path: 'juego/comprar', component: ComprarComponent },
+  { path: 'juego/inventario', component: InventarioComponent },
+  { path: 'juego/vender', component: VenderComponent },
+
   // Redirección por defecto
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+  // Rutas no válidas
+  { path: '**', redirectTo: 'dashboard' }
 ];

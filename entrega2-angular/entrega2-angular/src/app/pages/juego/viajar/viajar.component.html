@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>📍 Viajar desde {{ ciudadActual.nombre }}</h2>
+  
+    <div *ngIf="rutasDisponibles.length > 0; else sinRutas">
+      <table>
+        <thead>
+          <tr>
+            <th>Ciudad Destino</th>
+            <th>Tipo de Ruta</th>
+            <th>Costo</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ruta of rutasDisponibles">
+            <td>Ciudad {{ ruta.ciudadDestino }}</td>
+            <td>{{ ruta.tipoRuta }}</td>
+            <td>{{ ruta.costo }}</td>
+            <td>
+              <button (click)="viajar(ruta)" class="btn btn-primary">✈️ Viajar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #sinRutas>
+      <p>No hay rutas disponibles desde esta ciudad.</p>
+    </ng-template>
+  
+    <button routerLink="/juego/ciudad-actual" class="btn btn-home">🏠 Volver</button>
+  </div>
+  

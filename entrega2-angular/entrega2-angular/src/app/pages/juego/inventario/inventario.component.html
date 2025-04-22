@@ -1,0 +1,27 @@
+<div class="container" *ngIf="jugador">
+    <h2>🎒 Inventario de {{ jugador.nombre }}</h2>
+  
+    <div *ngIf="inventario.length > 0; else sinItems">
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of inventario">
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.stock }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #sinItems>
+      <p>No tienes productos en tu inventario.</p>
+    </ng-template>
+  
+    <button routerLink="/juego/ciudad" class="btn btn-home">🏠 Volver</button>
+  </div>
+  
