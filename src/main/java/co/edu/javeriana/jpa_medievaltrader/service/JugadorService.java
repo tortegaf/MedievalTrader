@@ -6,7 +6,6 @@ import co.edu.javeriana.jpa_medievaltrader.model.Producto;
 import co.edu.javeriana.jpa_medievaltrader.repository.CiudadRepository;
 import co.edu.javeriana.jpa_medievaltrader.repository.JugadorRepository;
 import co.edu.javeriana.jpa_medievaltrader.repository.ProductoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +14,16 @@ import java.util.Optional;
 @Service
 public class JugadorService {
 
-    @Autowired
-    private JugadorRepository jugadorRepository;
+    private final JugadorRepository jugadorRepository;
+    private final CiudadRepository ciudadRepository;
+    private final ProductoRepository productoRepository;
 
-    @Autowired
-    private CiudadRepository ciudadRepository;
-
-    @Autowired
-    private ProductoRepository productoRepository;
+    // ✅ Constructor manual para permitir pruebas unitarias con mocks
+    public JugadorService(JugadorRepository jugadorRepository, CiudadRepository ciudadRepository, ProductoRepository productoRepository) {
+        this.jugadorRepository = jugadorRepository;
+        this.ciudadRepository = ciudadRepository;
+        this.productoRepository = productoRepository;
+    }
 
     public List<Jugador> listarJugadores() {
         return jugadorRepository.findAll();
@@ -53,7 +54,7 @@ public class JugadorService {
 
         if (jugador.getOro() >= producto.getPrecio()) {
             jugador.setOro(jugador.getOro() - producto.getPrecio().intValue());
-            
+
             boolean encontrado = false;
             for (Producto p : jugador.getInventario()) {
                 if (p.getId().equals(producto.getId())) {
