@@ -7,5 +7,6 @@ export interface Jugador {
   nivel: number;
   oro: number;
   ciudad?: Ciudad;
-  inventario?: Producto[]; 
+  inventario?: Producto[];
+  rol: 'CARAVANERO' | 'COMERCIANTE'; 
 }

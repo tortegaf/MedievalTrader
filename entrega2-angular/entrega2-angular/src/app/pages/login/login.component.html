@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>🎮 Iniciar Sesión</h2>
+  
+    <div class="form-group">
+      <label for="jugador">Selecciona tu jugador:</label>
+      <select [(ngModel)]="jugadorSeleccionado" name="jugador" class="form-control">
+        <option [ngValue]="null" disabled selected>-- Elegir jugador --</option>
+        <option *ngFor="let jugador of jugadores" [ngValue]="jugador">
+          {{ jugador.nombre }} ({{ jugador.rol }})
+        </option>
+      </select>
+    </div>
+  
+    <button class="btn btn-primary mt-3" [disabled]="!jugadorSeleccionado" (click)="login()">
+      Entrar al juego 🚀
+    </button>
+  </div>
+  

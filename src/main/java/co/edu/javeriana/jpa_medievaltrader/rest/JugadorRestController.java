@@ -1,9 +1,12 @@
 package co.edu.javeriana.jpa_medievaltrader.rest;
 
 import co.edu.javeriana.jpa_medievaltrader.model.Jugador;
+import co.edu.javeriana.jpa_medievaltrader.model.Rol;
 import co.edu.javeriana.jpa_medievaltrader.service.JugadorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +32,9 @@ public class JugadorRestController {
 
     @PostMapping
     public Jugador guardarJugador(@RequestBody Jugador jugador) {
+        if (jugador.getRol() == null) {
+            jugador.setRol(Rol.COMERCIANTE); // Rol por defecto si no viene en la solicitud
+        }
         return jugadorService.guardarJugador(jugador);
     }
 
@@ -39,6 +45,13 @@ public class JugadorRestController {
 
     @PutMapping("/{id}/viajar")
     public Jugador viajar(@PathVariable Long id, @RequestBody Map<String, Long> body) {
+        Jugador jugador = jugadorService.obtenerJugadorPorId(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Jugador no encontrado"));
+
+        if (jugador.getRol() != Rol.CARAVANERO) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Solo un caravanero puede viajar");
+        }
+
         Long ciudadId = body.get("ciudadId");
         return jugadorService.viajar(id, ciudadId);
     }

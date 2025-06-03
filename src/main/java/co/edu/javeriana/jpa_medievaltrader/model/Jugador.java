@@ -28,6 +28,10 @@ public class Jugador {
     @ManyToMany
     private List<Producto> inventario = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true)
+    private Rol rol;
+
     public Jugador() {}
 
     public Jugador(String nombre, int nivel, int oro) {
@@ -53,4 +57,7 @@ public class Jugador {
 
     public List<Producto> getInventario() { return inventario; }
     public void setInventario(List<Producto> inventario) { this.inventario = inventario; }
+
+    public Rol getRol() { return rol; }
+    public void setRol(Rol rol) { this.rol = rol; }
 }

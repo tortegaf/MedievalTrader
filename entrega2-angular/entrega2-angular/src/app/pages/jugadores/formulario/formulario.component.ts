@@ -17,7 +17,8 @@ export class FormularioComponent {
     id: null,
     nombre: '',
     nivel: 0,
-    oro: 0
+    oro: 0,
+    rol: 'COMERCIANTE' 
   };
 
   constructor(

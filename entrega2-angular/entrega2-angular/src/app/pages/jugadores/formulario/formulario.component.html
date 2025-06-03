@@ -1,31 +1,39 @@
 <div class="container">
-    <h2>{{ jugador.id === null ? 'Crear Nuevo Jugador' : 'Editar Jugador' }}</h2>
-  
-    <form (ngSubmit)="guardarJugador()" #jugadorForm="ngForm" class="form-container">
-      <input type="hidden" [(ngModel)]="jugador.id" name="id">
-  
-      <div class="form-group">
-        <label for="nombre">🧙‍♂️ Nombre:</label>
-        <input type="text" id="nombre" [(ngModel)]="jugador.nombre" name="nombre" class="input-field" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="nivel">⚔️ Nivel:</label>
-        <input type="number" id="nivel" [(ngModel)]="jugador.nivel" name="nivel" class="input-field" required>
-      </div>
-  
-      <div class="form-group">
-        <label for="oro">💰 Oro:</label>
-        <input type="number" id="oro" [(ngModel)]="jugador.oro" name="oro" class="input-field" required>
-      </div>
-  
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">💾 Guardar</button>
-      </div>
-    </form>
-  
-    <div class="form-actions">
-      <button routerLink="/jugadores/lista" class="btn btn-secondary">🔙 Volver al listado</button>
+  <h2>{{ jugador.id === null ? 'Crear Nuevo Jugador' : 'Editar Jugador' }}</h2>
+
+  <form (ngSubmit)="guardarJugador()" #jugadorForm="ngForm" class="form-container">
+    <input type="hidden" [(ngModel)]="jugador.id" name="id">
+
+    <div class="form-group">
+      <label for="nombre">🧙‍♂️ Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="jugador.nombre" name="nombre" class="input-field" required>
     </div>
+
+    <div class="form-group">
+      <label for="nivel">⚔️ Nivel:</label>
+      <input type="number" id="nivel" [(ngModel)]="jugador.nivel" name="nivel" class="input-field" required>
+    </div>
+
+    <div class="form-group">
+      <label for="oro">💰 Oro:</label>
+      <input type="number" id="oro" [(ngModel)]="jugador.oro" name="oro" class="input-field" required>
+    </div>
+
+    <div class="form-group">
+      <label for="rol">🧩 Rol:</label>
+      <select id="rol" [(ngModel)]="jugador.rol" name="rol" class="input-field" required>
+        <option value="" disabled selected>Selecciona un rol</option>
+        <option value="CARAVANERO">Caravanero</option>
+        <option value="COMERCIANTE">Comerciante</option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">💾 Guardar</button>
+    </div>
+  </form>
+
+  <div class="form-actions">
+    <button routerLink="/jugadores/lista" class="btn btn-secondary">🔙 Volver al listado</button>
   </div>
-  
+</div>

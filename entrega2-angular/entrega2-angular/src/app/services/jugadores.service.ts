@@ -12,8 +12,9 @@ export class JugadoresService {
   constructor(private http: HttpClient) {}
 
   listarJugadores(): Observable<Jugador[]> {
-    return this.http.get<Jugador[]>(this.apiUrl);
+    return this.getJugadores();
   }
+  
 
   guardarJugador(jugador: Jugador): Observable<Jugador> {
     return this.http.post<Jugador>(this.apiUrl, jugador);
@@ -37,6 +38,11 @@ export class JugadoresService {
       { productoId }
     );
   }
+
+  getJugadores(): Observable<Jugador[]> {
+    return this.http.get<Jugador[]>(this.apiUrl);
+  }
+  
   
   
 }
