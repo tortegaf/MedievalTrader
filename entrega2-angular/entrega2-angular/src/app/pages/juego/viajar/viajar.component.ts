@@ -5,6 +5,7 @@ import { Jugador } from '../../../model/jugador.model';
 import { Ruta } from '../../../model/ruta.model';
 import { RutasService } from '../../../services/rutas.service';
 import { HttpClient } from '@angular/common/http';
+import { SesionService } from '../../../services/sesion.service';
 
 @Component({
   selector: 'app-viajar',
@@ -20,27 +21,23 @@ export class ViajarComponent implements OnInit {
   constructor(
     private rutasService: RutasService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private sesionService: SesionService
   ) {}
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
-      if (jugadorGuardado) {
-        this.jugador = JSON.parse(jugadorGuardado);
+    this.jugador = this.sesionService.obtenerJugador();
 
-        if (this.jugador && this.jugador.ciudad) {
-          this.ciudadActual = this.jugador.ciudad;
+    if (this.jugador && this.jugador.ciudad) {
+      this.ciudadActual = this.jugador.ciudad;
 
-          const ciudadId = this.jugador.ciudad.id;
-          if (ciudadId != null) {
-            this.rutasService.listarRutas().subscribe((rutas) => {
-              this.rutasDisponibles = rutas.filter(ruta =>
-                ruta.ciudadOrigen?.id === ciudadId
-              );
-            });
-          }
-        }
+      const ciudadId = this.jugador.ciudad.id;
+      if (ciudadId != null) {
+        this.rutasService.listarRutas().subscribe((rutas) => {
+          this.rutasDisponibles = rutas.filter(ruta =>
+            ruta.ciudadOrigen?.id === ciudadId
+          );
+        });
       }
     }
   }
@@ -52,7 +49,7 @@ export class ViajarComponent implements OnInit {
     const body = { ciudadId: ruta.ciudadDestino.id };
 
     this.http.put<Jugador>(url, body).subscribe((jugadorActualizado) => {
-      sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(jugadorActualizado));
+      this.sesionService.actualizarJugador(jugadorActualizado);
 
       alert(`¡Viajaste con éxito a ${ruta.ciudadDestino?.nombre}! 🏰`);
 

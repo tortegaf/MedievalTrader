@@ -5,17 +5,25 @@
     <p>No hay jugadores registrados</p>
   </div>
 
-  <div *ngFor="let jugador of jugadores" class="form-group">
+  <div *ngFor="let jugador of jugadores" class="form-group" style="margin-bottom: 25px;">
     <p>
       🧙‍♂️ <strong>{{ jugador.nombre }}</strong>  
-      | Nivel: {{ jugador.nivel }}  
-      | Oro: {{ jugador.oro }}
+      | ⚔️ Nivel: {{ jugador.nivel }}  
+      | 💰 Oro: {{ jugador.oro }}  
+      | 🧩 Rol: <strong>{{ jugador.rol }}</strong>
     </p>
+
+    <label for="rolSelect">Cambiar Rol:</label>
+    <select [(ngModel)]="jugador.rol" class="input-field" name="rolSelect">
+      <option value="CARAVANERO">🧳 Caravanero</option>
+      <option value="COMERCIANTE">🛍️ Comerciante</option>
+    </select>
+
     <button class="btn btn-primary" (click)="seleccionar(jugador)">Seleccionar</button>
   </div>
 
   <div *ngIf="jugadorSeleccionado" style="margin-top: 30px;" class="form-actions">
-    <p><strong>Seleccionaste:</strong> {{ jugadorSeleccionado.nombre }}</p>
+    <p><strong>Seleccionaste:</strong> {{ jugadorSeleccionado.nombre }} ({{ jugadorSeleccionado.rol }})</p>
     <button class="btn btn-secondary" (click)="continuar()" style="font-size: 18px; padding: 12px 24px;">
       ⚔️ Entrar al mundo medieval
     </button>

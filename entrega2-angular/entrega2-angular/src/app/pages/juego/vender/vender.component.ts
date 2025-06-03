@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Jugador } from '../../../model/jugador.model';
 import { Producto } from '../../../model/producto.model';
+import { JugadoresService } from '../../../services/jugadores.service';
+import { SesionService } from '../../../services/sesion.service';
 
 @Component({
   selector: 'app-vender',
@@ -14,33 +16,32 @@ export class VenderComponent implements OnInit {
   jugador: Jugador | null = null;
   inventario: Producto[] = [];
 
+  constructor(
+    private jugadoresService: JugadoresService,
+    private sesionService: SesionService
+  ) {}
+
   ngOnInit(): void {
-    const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
-    if (jugadorGuardado) {
-      this.jugador = JSON.parse(jugadorGuardado);
-      this.inventario = this.jugador?.inventario ?? [];
+    this.jugador = this.sesionService.obtenerJugador();
+
+    if (this.jugador) {
+      this.inventario = this.jugador.inventario ?? [];
     }
   }
 
   vender(producto: Producto): void {
     if (!this.jugador) return;
 
-    this.jugador.oro += producto.precio;
-
-    const item = this.jugador.inventario?.find((p: Producto) => p.id === producto.id);
-
-    if (item) {
-    item.stock -= 1;
-
-    if (item.stock <= 0) {
-    this.jugador.inventario = this.jugador.inventario?.filter((p: Producto) => p.id !== producto.id);
-    }
-  }
-
-
-    sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(this.jugador));
-    this.inventario = this.jugador.inventario ?? [];
-
-    alert(`💰 Vendiste: ${producto.nombre}`);
+    this.jugadoresService.venderProducto(this.jugador.id!, producto.id!).subscribe({
+      next: (jugadorActualizado: Jugador) => {
+        this.jugador = jugadorActualizado;
+        this.inventario = jugadorActualizado.inventario ?? [];
+        this.sesionService.actualizarJugador(jugadorActualizado);
+        alert(`💰 Vendiste: ${producto.nombre}`);
+      },
+      error: () => {
+        alert('❌ No se pudo vender el producto');
+      }
+    });
   }
 }

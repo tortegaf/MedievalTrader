@@ -14,7 +14,6 @@ export class JugadoresService {
   listarJugadores(): Observable<Jugador[]> {
     return this.getJugadores();
   }
-  
 
   guardarJugador(jugador: Jugador): Observable<Jugador> {
     return this.http.post<Jugador>(this.apiUrl, jugador);
@@ -39,10 +38,14 @@ export class JugadoresService {
     );
   }
 
+  venderProducto(jugadorId: number, productoId: number): Observable<Jugador> {
+    return this.http.put<Jugador>(
+      `${this.apiUrl}/${jugadorId}/vender`,
+      { productoId }
+    );
+  }
+
   getJugadores(): Observable<Jugador[]> {
     return this.http.get<Jugador[]>(this.apiUrl);
   }
-  
-  
-  
 }

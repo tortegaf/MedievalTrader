@@ -5,7 +5,8 @@ import { CiudadesService } from '../../../services/ciudades.service';
 import { Jugador } from '../../../model/jugador.model';
 import { JugadoresService } from '../../../services/jugadores.service';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { SesionService } from '../../../services/sesion.service'; // ✅
 
 @Component({
   selector: 'app-ciudad-actual',
@@ -20,14 +21,19 @@ export class CiudadActualComponent implements OnInit {
 
   constructor(
     private ciudadService: CiudadesService, 
-    private jugadoresService: JugadoresService
+    private jugadoresService: JugadoresService,
+    private sesionService: SesionService,
+    private router: Router // ✅
   ) {}
 
   ngOnInit(): void {
-    const guardado = sessionStorage.getItem('jugadorSeleccionado');
-    if (guardado) {
-      this.jugador = JSON.parse(guardado);
-      this.ciudadSeleccionadaId = this.jugador?.ciudad?.id ?? null;
+    const guardado = this.sesionService.obtenerJugador(); // ✅
+    if (guardado?.id) {
+      this.jugadoresService.obtenerJugadorPorId(guardado.id).subscribe((jugador: Jugador) => {
+        this.jugador = jugador;
+        this.ciudadSeleccionadaId = jugador?.ciudad?.id ?? null;
+        this.sesionService.actualizarJugador(jugador); // ✅
+      });
     }
 
     this.ciudadService.listarCiudades().subscribe((data: Ciudad[]) => {
@@ -41,9 +47,16 @@ export class CiudadActualComponent implements OnInit {
     this.jugadoresService
       .viajar(this.jugador.id!, this.ciudadSeleccionadaId)
       .subscribe(actualizado => {
-        sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(actualizado));
         this.jugador = actualizado;
+        this.ciudadSeleccionadaId = actualizado.ciudad?.id ?? null;
+        this.sesionService.actualizarJugador(actualizado); 
         alert('Ciudad asignada correctamente');
       });
+  }
+
+  cerrarSesion(): void {
+    this.sesionService.limpiarSesion();
+    this.jugador = null;
+    this.router.navigate(['/dashboard']); 
   }
 }

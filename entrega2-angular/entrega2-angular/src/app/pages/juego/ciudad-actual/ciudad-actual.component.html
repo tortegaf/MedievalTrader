@@ -4,35 +4,53 @@
   <p><strong>Jugador:</strong> {{ jugador.nombre }}</p>
   <p><strong>Nivel:</strong> {{ jugador.nivel }}</p>
   <p><strong>Oro:</strong> {{ jugador.oro }}</p>
+  <p><strong>Rol:</strong> {{ jugador.rol }}</p>
 
-  <div class="form-group">
-    <label for="ciudad">Asignar Ciudad:</label>
-    <select
-      [(ngModel)]="ciudadSeleccionadaId"
-      name="ciudad"
-      id="ciudad"
-      class="input-field"
-      required
-    >
-      <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
-        {{ ciudad.nombre }}
-      </option>
-    </select>
+  <!-- Solo para CARAVANERO -->
+  <div *ngIf="jugador.rol === 'CARAVANERO'">
+    <div class="form-group">
+      <label for="ciudad">Asignar Ciudad:</label>
+      <select
+        [(ngModel)]="ciudadSeleccionadaId"
+        name="ciudad"
+        id="ciudad"
+        class="input-field"
+        required
+      >
+        <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">
+          {{ ciudad.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button (click)="asignarCiudad()" class="btn btn-primary">✅ Asignar Ciudad</button>
+    </div>
+
+    <div class="menu-buttons">
+      <button routerLink="/juego/viajar" class="btn-create">🛤️ Viajar</button>
+      <button routerLink="/juego/comprar" class="btn-create">🛒 Comprar</button>
+      <button routerLink="/juego/vender" class="btn-create">💰 Vender</button>
+      <button routerLink="/juego/inventario" class="btn-create">🎒 Inventario</button>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <button (click)="asignarCiudad()" class="btn btn-primary">✅ Asignar Ciudad</button>
+  <!-- Solo para COMERCIANTE -->
+  <div *ngIf="jugador.rol === 'COMERCIANTE'">
+    <div class="menu-buttons">
+      <button routerLink="/juego/comprar" class="btn-create">🛒 Comprar</button>
+      <button routerLink="/juego/vender" class="btn-create">💰 Vender</button>
+      <button routerLink="/juego/inventario" class="btn-create">🎒 Inventario</button>
+    </div>
   </div>
 
-  <div class="menu-buttons">
-    <button routerLink="/juego/comprar" class="btn-create">🛒 Comprar</button>
-    <button routerLink="/juego/vender" class="btn-create">💰 Vender</button>
-    <button routerLink="/juego/viajar" class="btn-create">🛤️ Viajar</button>
-    <button routerLink="/juego/inventario" class="btn-create">🎒 Inventario</button>
-    <button routerLink="/dashboard" class="btn-home">🏠 Volver al Menú</button>
+  <!-- Cerrar sesión visible siempre -->
+  <div class="form-actions" style="margin-top: 20px;">
+    <button (click)="cerrarSesion()" class="btn-danger">🚪 Cerrar sesión</button>
   </div>
 </div>
 
+<!-- Si no hay jugador -->
 <div *ngIf="!jugador">
   <p>No se ha seleccionado ningún jugador.</p>
   <button routerLink="/juego/seleccionar" class="btn btn-primary">Seleccionar jugador</button>

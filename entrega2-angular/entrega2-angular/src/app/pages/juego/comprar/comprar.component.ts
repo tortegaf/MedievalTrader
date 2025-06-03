@@ -5,6 +5,7 @@ import { Jugador } from '../../../model/jugador.model';
 import { Producto } from '../../../model/producto.model';
 import { ProductosService } from '../../../services/productos.service';
 import { JugadoresService } from '../../../services/jugadores.service';
+import { SesionService } from '../../../services/sesion.service'; 
 
 @Component({
   selector: 'app-comprar',
@@ -18,14 +19,12 @@ export class ComprarComponent implements OnInit {
 
   constructor(
     private productosService: ProductosService,
-    private jugadoresService: JugadoresService
+    private jugadoresService: JugadoresService,
+    private sesionService: SesionService 
   ) {}
 
   ngOnInit(): void {
-    const jugadorGuardado = sessionStorage.getItem('jugadorSeleccionado');
-    if (jugadorGuardado) {
-      this.jugador = JSON.parse(jugadorGuardado);
-    }
+    this.jugador = this.sesionService.obtenerJugador(); 
 
     this.productosService.listarProductos().subscribe((productos) => {
       this.productosDisponibles = productos;
@@ -37,7 +36,7 @@ export class ComprarComponent implements OnInit {
 
     this.jugadoresService.comprarProducto(this.jugador.id!, producto.id!).subscribe((jugadorActualizado) => {
       this.jugador = jugadorActualizado;
-      sessionStorage.setItem('jugadorSeleccionado', JSON.stringify(this.jugador));
+      this.sesionService.actualizarJugador(jugadorActualizado); 
       alert(`🛍️ Compraste: ${producto.nombre}`);
     }, error => {
       alert('💸 No tienes suficiente oro o ocurrió un error');

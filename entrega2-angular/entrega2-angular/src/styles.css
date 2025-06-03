@@ -138,6 +138,19 @@ td a {
     transition: 0.3s;
 }
 
+.btn-danger{
+    color: black;
+    display: inline-block;
+    padding: 12px 20px;
+    margin-top: 15px;
+    background-color: #B71C1C;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
 .btn-delete:hover {
     color: #B71C1C;
 }
