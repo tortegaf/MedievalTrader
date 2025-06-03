@@ -6,7 +6,7 @@ import { Jugador } from '../../../model/jugador.model';
 import { JugadoresService } from '../../../services/jugadores.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { SesionService } from '../../../services/sesion.service'; // ✅
+import { SesionService } from '../../../services/sesion.service'; 
 
 @Component({
   selector: 'app-ciudad-actual',
@@ -23,16 +23,16 @@ export class CiudadActualComponent implements OnInit {
     private ciudadService: CiudadesService, 
     private jugadoresService: JugadoresService,
     private sesionService: SesionService,
-    private router: Router // ✅
+    private router: Router 
   ) {}
 
   ngOnInit(): void {
-    const guardado = this.sesionService.obtenerJugador(); // ✅
+    const guardado = this.sesionService.obtenerJugador(); 
     if (guardado?.id) {
       this.jugadoresService.obtenerJugadorPorId(guardado.id).subscribe((jugador: Jugador) => {
         this.jugador = jugador;
         this.ciudadSeleccionadaId = jugador?.ciudad?.id ?? null;
-        this.sesionService.actualizarJugador(jugador); // ✅
+        this.sesionService.actualizarJugador(jugador); 
       });
     }
 

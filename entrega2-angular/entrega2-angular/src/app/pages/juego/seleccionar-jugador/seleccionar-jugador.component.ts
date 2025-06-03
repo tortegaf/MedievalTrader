@@ -31,7 +31,6 @@ export class SeleccionarJugadorComponent implements OnInit {
   seleccionar(jugador: Jugador): void {
     this.jugadorSeleccionado = jugador;
 
-    // Guardar el cambio de rol en backend
     this.jugadoresService.guardarJugador(jugador).subscribe(() => {
       this.sesionService.actualizarJugador(jugador);
     });
